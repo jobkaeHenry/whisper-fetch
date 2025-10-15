@@ -16,10 +16,10 @@
   "sideEffects": false,
   "license": "MIT",
   "author": "jobkaehenry",
-  "repository": "https://github.com/jobkaehenry/whisper-fetch",
-  "homepage": "https://github.com/jobkaehenry/whisper-fetch#readme",
+  "repository": "https://github.com/jobkaeHenry/whisper-fetch",
+  "homepage": "https://github.com/jobkaeHenry/whisper-fetch#readme",
   "bugs": {
-    "url": "https://github.com/jobkaehenry/whisper-fetch/issues"
+    "url": "https://github.com/jobkaeHenry/whisper-fetch/issues"
   },
   "keywords": [
     "prefetch",
