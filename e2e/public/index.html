@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Background Prefetcher E2E</title>
+    <script type="module">
+      import { BackgroundPrefetcher } from '/dist/index.js';
+
+      window.__fetchCounts = { head: 0, range: 0 };
+      window.__prefetchCompleted = false;
+      window.__started = false;
+      window.__statusLog = [];
+
+      // Hook fetch to count HEAD vs Range
+      const origFetch = window.fetch.bind(window);
+      window.fetch = async (input, init = {}) => {
+        const method = (init && init.method) || 'GET';
+        const headers = (init && init.headers) || {};
+        if (method === 'HEAD') window.__fetchCounts.head++;
+        if (headers && headers.Range) window.__fetchCounts.range++;
+        return origFetch(input, init);
+      };
+
+      async function run() {
+        const url = '/file.bin';
+        const pf = new BackgroundPrefetcher({
+          url,
+          minIdleMs: 0,
+          allowOnCellular: true,
+          respectSaveData: false,
+          onStatus: (s) => {
+            window.__statusLog.push(s);
+            if (s === 'started') window.__started = true;
+            if (s === 'completed') window.__prefetchCompleted = true;
+          },
+        });
+        window.__pf = pf;
+        await pf.start();
+        // wait a tick for status propagation
+        await new Promise(r => setTimeout(r, 0));
+
+        // Simulate foreground network bursts and manually pause/resume around them.
+        const burst = async () => {
+          // Trigger multiple small requests
+          await Promise.all([
+            fetch('/ping'),
+            fetch('/ping'),
+          ]);
+        };
+
+        // After started, do 2 bursts with pause/resume to emulate interference
+        if (window.__started) {
+          // First burst
+          await burst();
+          pf.pause();
+          await new Promise(r => setTimeout(r, 300));
+          await pf.resume();
+
+          // Second burst
+          await new Promise(r => setTimeout(r, 200));
+          await burst();
+          pf.pause();
+          await new Promise(r => setTimeout(r, 300));
+          await pf.resume();
+        }
+      }
+
+      run();
+    </script>
+  </head>
+  <body>
+    <h1>Background Prefetcher E2E</h1>
+  </body>
+</html>
