@@ -1,0 +1,143 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "docs": "Documentación",
+    "api": "API",
+    "examples": "Ejemplos",
+    "github": "GitHub"
+  },
+  "hero": {
+    "title": "Whisper Fetch",
+    "subtitle": "Biblioteca inteligente de precarga de archivos grandes en segundo plano durante estados de inactividad de red",
+    "getStarted": "Empezar",
+    "viewGithub": "GitHub"
+  },
+  "demo": {
+    "title": "Demo Interactiva",
+    "description": "Vea cómo funciona Whisper Fetch en acción",
+    "startDemo": "Iniciar Demo",
+    "downloading": "Descargando...",
+    "done": "¡Listo!",
+    "idle": "Inactivo",
+    "completed": "Completado"
+  },
+  "features": {
+    "intelligentDownload": {
+      "title": "Descarga Inteligente en Segundo Plano",
+      "description": "Se pausa automáticamente durante la actividad de red en primer plano y se reanuda en inactividad, sin interferir con la experiencia del usuario."
+    },
+    "adaptiveChunk": {
+      "title": "Tamaño de Fragmento Adaptativo",
+      "description": "Ajusta automáticamente el tamaño de los fragmentos de 512KB a 4MB según las condiciones de red para un rendimiento óptimo de descarga."
+    },
+    "storage": {
+      "title": "Almacenamiento OPFS/IndexedDB",
+      "description": "Usa primero el streaming OPFS de Chrome, con respaldo automático a IndexedDB para una amplia compatibilidad con navegadores."
+    },
+    "integrity": {
+      "title": "Verificación de Integridad",
+      "description": "La verificación opcional de hash SHA-256 garantiza la integridad de los archivos descargados."
+    },
+    "mobileFriendly": {
+      "title": "Amigable con Móviles",
+      "description": "Diseñado para móviles con control de red celular, respeto al modo de ahorro de datos y configuración de velocidad de red mínima."
+    },
+    "reactSupport": {
+      "title": "Soporte React",
+      "description": "Un Hook de React fácil de usar permite el uso inmediato en aplicaciones React."
+    }
+  },
+  "quickStart": {
+    "title": "Inicio Rápido",
+    "installation": "Instalación",
+    "basicUsage": "Uso Básico",
+    "reactHook": "Hook React"
+  },
+  "keyFeatures": {
+    "title": "Características Principales",
+    "autoPauseResume": {
+      "title": "Pausa/Reanudación Automática",
+      "description": "Pausa automáticamente las descargas cuando los usuarios usan activamente la red y se reanuda en inactividad. Esto permite una precarga eficiente de archivos grandes sin interrumpir la experiencia del usuario."
+    },
+    "rangeResume": {
+      "title": "Reanudación Basada en Range",
+      "description": "Usa solicitudes HTTP Range para continuar descargas interrumpidas. No es necesario reiniciar desde el principio después de errores de red o pausas del usuario."
+    },
+    "serverRequirements": {
+      "title": "Requisitos del Servidor",
+      "item1": "Soporte HTTP Range (206 Partial Content)",
+      "item2": "ETag/If-Range recomendado (para reanudación segura)"
+    }
+  },
+  "browserSupport": {
+    "title": "Soporte de Navegadores",
+    "description": "Chrome 114+ ofrece el mejor rendimiento con streaming OPFS. Otros navegadores modernos son compatibles mediante respaldo IndexedDB."
+  },
+  "cta": {
+    "title": "Comience Ahora",
+    "description": "Mejore la experiencia del usuario con Whisper Fetch",
+    "viewDocs": "Ver Documentación",
+    "viewExamples": "Ver Ejemplos"
+  },
+  "footer": {
+    "license": "Licencia MIT © 2024 jobkaehenry"
+  },
+  "examples": {
+    "title": "Ejemplos de Uso",
+    "subtitle": "Descubra diversas formas de usar Whisper Fetch en proyectos reales",
+    "videoStreaming": {
+      "title": "Plataforma de Streaming de Video",
+      "description": "Pre-descargue archivos de video grandes antes de que los usuarios los vean para proporcionar una experiencia de visualización sin búfer."
+    },
+    "gameAssets": {
+      "title": "Cargador de Assets de Juego",
+      "description": "Pre-cargue los assets del siguiente nivel en segundo plano para minimizar el tiempo de carga durante las transiciones de nivel."
+    },
+    "documentViewer": {
+      "title": "Visor de Documentos",
+      "description": "Precargue eficientemente archivos PDF o documentos grandes para una visualización inmediata."
+    },
+    "nextjs": {
+      "title": "Integración Next.js",
+      "description": "Cómo usar Whisper Fetch en Next.js App Router. Marque como componente de cliente para evitar problemas de SSR."
+    },
+    "offline": {
+      "title": "Gestor de Contenido Offline",
+      "description": "Pre-descargue y almacene en caché el contenido para que los usuarios lo vean offline más tarde."
+    },
+    "progressive": {
+      "title": "Carga Progresiva de Imágenes",
+      "description": "Muestre primero miniaturas de baja calidad, cargue imágenes de alta calidad en segundo plano para transiciones suaves."
+    },
+    "moreUseCases": {
+      "title": "Más Casos de Uso",
+      "musicStreaming": {
+        "title": "Streaming de Música",
+        "description": "Pre-descargue las siguientes canciones de la lista de reproducción para una experiencia de reproducción sin interrupciones."
+      },
+      "ebook": {
+        "title": "Lector de Libros Electrónicos",
+        "description": "Pre-cargue los siguientes capítulos según la posición de lectura actual del usuario."
+      },
+      "designTool": {
+        "title": "Herramienta de Diseño",
+        "description": "Cargue assets de alta resolución y archivos de fuentes en segundo plano para uso inmediato."
+      },
+      "dataViz": {
+        "title": "Visualización de Datos",
+        "description": "Pre-descargue conjuntos de datos grandes para un renderizado rápido de gráficos."
+      },
+      "videoEditor": {
+        "title": "Editor de Video",
+        "description": "Pre-cargue los siguientes clips en la línea de tiempo para una experiencia de edición fluida."
+      },
+      "maps": {
+        "title": "Aplicación de Mapas",
+        "description": "Pre-descargue las teselas y capas circundantes para una navegación rápida del mapa."
+      }
+    },
+    "ctaTitle": "Aplique a Su Proyecto",
+    "ctaDescription": "Whisper Fetch se puede configurar de forma flexible para diversos casos de uso"
+  },
+  "language": "Idioma"
+}

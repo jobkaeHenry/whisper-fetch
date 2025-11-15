@@ -160,6 +160,20 @@ if (navigator.connection?.effectiveType === '4g') {
 - **Idle-aware**: Defers when foreground network activity detected; resumes on idle.
 - **Resume**: Uses Range with adaptive chunk size to continue from last offset.
 
+## Documentation
+
+완전한 문서, 사용 예제 및 API 레퍼런스는 문서 사이트에서 확인하세요:
+
+```bash
+# 문서 사이트 개발 서버 실행
+npm run docs:develop
+
+# 문서 사이트 빌드
+npm run docs:build
+```
+
+문서 사이트는 `http://localhost:8000` 에서 확인할 수 있습니다.
+
 ## Testing
 Run tests with:
 ```bash
