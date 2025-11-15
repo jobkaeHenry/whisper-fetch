@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 interface LiveDemoProps {
   title: string;
@@ -7,6 +8,7 @@ interface LiveDemoProps {
 }
 
 const LiveDemo: React.FC<LiveDemoProps> = ({ title, description }) => {
+  const { t } = useTranslation();
   const [status, setStatus] = useState<'idle' | 'downloading' | 'completed'>('idle');
   const [progress, setProgress] = useState(0);
 
@@ -95,9 +97,9 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ title, description }) => {
 
           <div className="status-badges">
             <span className={`status-badge ${status}`}>
-              {status === 'idle' && '⏸ Idle'}
-              {status === 'downloading' && '⬇ Downloading...'}
-              {status === 'completed' && '✓ Completed'}
+              {status === 'idle' && `⏸ ${t('demo.idle')}`}
+              {status === 'downloading' && `⬇ ${t('demo.downloading')}`}
+              {status === 'completed' && `✓ ${t('demo.completed')}`}
             </span>
           </div>
 
@@ -106,7 +108,11 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ title, description }) => {
             disabled={status === 'downloading'}
             className="demo-button"
           >
-            {status === 'idle' ? 'Start Demo' : status === 'downloading' ? 'Downloading...' : 'Done!'}
+            {status === 'idle'
+              ? t('demo.startDemo')
+              : status === 'downloading'
+              ? t('demo.downloading')
+              : t('demo.done')}
           </button>
         </div>
       </div>

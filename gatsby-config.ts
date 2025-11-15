@@ -17,6 +17,35 @@ const config: GatsbyConfig = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/locales`,
+        name: `locale`
+      }
+    },
+    {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        localeJsonSourceName: `locale`,
+        languages: [`en`, `ko`, `ja`, `zh`, `fr`, `es`, `ar`, `hi`],
+        defaultLanguage: `en`,
+        siteUrl: `https://github.com/jobkaeHenry/whisper-fetch`,
+        i18nextOptions: {
+          interpolation: {
+            escapeValue: false
+          },
+          keySeparator: '.',
+          nsSeparator: false
+        },
+        pages: [
+          {
+            matchPath: '/:lang?',
+            getLanguageFromPath: true
+          }
+        ]
+      }
+    },
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
         name: "Whisper Fetch - 지능형 백그라운드 파일 프리페치",

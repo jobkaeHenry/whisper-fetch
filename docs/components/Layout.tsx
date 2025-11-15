@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 import { ThemeProvider, useTheme } from './ThemeProvider';
+import LanguageSwitcher from './LanguageSwitcher';
 import '../styles/global.css';
 
 interface LayoutProps {
@@ -14,7 +16,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       className="theme-toggle"
       aria-label="Toggle theme"
-      title={`현재: ${theme === 'light' ? '라이트' : '다크'} 모드`}
+      title={`${theme === 'light' ? 'Dark' : 'Light'} mode`}
     >
       {theme === 'light' ? '🌙' : '☀️'}
     </button>
@@ -22,6 +24,8 @@ const ThemeToggle = () => {
 };
 
 const LayoutContent: React.FC<LayoutProps> = ({ children }) => {
+  const { t } = useI18next();
+
   return (
     <div className="layout">
       <header className="header">
@@ -31,18 +35,21 @@ const LayoutContent: React.FC<LayoutProps> = ({ children }) => {
             <span className="version">v1.0.0</span>
           </div>
           <ul className="nav-links">
-            <li><a href="/">홈</a></li>
-            <li><a href="/docs">문서</a></li>
-            <li><a href="/api">API</a></li>
-            <li><a href="/examples">예제</a></li>
+            <li><Link to="/">{t('nav.home')}</Link></li>
+            <li><Link to="/docs">{t('nav.docs')}</Link></li>
+            <li><Link to="/api">{t('nav.api')}</Link></li>
+            <li><Link to="/examples">{t('nav.examples')}</Link></li>
             <li>
               <a
                 href="https://github.com/jobkaeHenry/whisper-fetch"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                GitHub
+                {t('nav.github')}
               </a>
+            </li>
+            <li>
+              <LanguageSwitcher />
             </li>
             <li>
               <ThemeToggle />
@@ -54,18 +61,18 @@ const LayoutContent: React.FC<LayoutProps> = ({ children }) => {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a href="/">홈</a>
-            <a href="/docs">문서</a>
-            <a href="/api">API</a>
-            <a href="/examples">예제</a>
+            <Link to="/">{t('nav.home')}</Link>
+            <Link to="/docs">{t('nav.docs')}</Link>
+            <Link to="/api">{t('nav.api')}</Link>
+            <Link to="/examples">{t('nav.examples')}</Link>
             <a href="https://github.com/jobkaeHenry/whisper-fetch" target="_blank" rel="noopener noreferrer">
-              GitHub
+              {t('nav.github')}
             </a>
             <a href="https://www.npmjs.com/package/@jobkaehenry/whisper-fetch" target="_blank" rel="noopener noreferrer">
               NPM
             </a>
           </div>
-          <p>MIT License © 2024 jobkaehenry</p>
+          <p>{t('footer.license')}</p>
         </div>
       </footer>
     </div>
