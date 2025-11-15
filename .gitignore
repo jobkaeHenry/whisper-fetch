@@ -37,3 +37,7 @@ test-results/
 # Env
 .env
 .env.*
+
+# Gatsby
+.cache/
+public/

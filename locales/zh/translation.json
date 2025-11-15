@@ -1,0 +1,143 @@
+{
+  "nav": {
+    "home": "首页",
+    "docs": "文档",
+    "api": "API",
+    "examples": "示例",
+    "github": "GitHub"
+  },
+  "hero": {
+    "title": "Whisper Fetch",
+    "subtitle": "在网络空闲状态下智能预取大文件的后台下载库",
+    "getStarted": "开始使用",
+    "viewGithub": "GitHub"
+  },
+  "demo": {
+    "title": "互动演示",
+    "description": "亲自体验Whisper Fetch的工作原理",
+    "startDemo": "开始演示",
+    "downloading": "下载中...",
+    "done": "完成！",
+    "idle": "空闲",
+    "completed": "已完成"
+  },
+  "features": {
+    "intelligentDownload": {
+      "title": "智能后台下载",
+      "description": "在前台网络活动时自动暂停，空闲时恢复下载，确保不干扰用户体验。"
+    },
+    "adaptiveChunk": {
+      "title": "自适应分块大小",
+      "description": "根据网络状况自动调整分块大小（512KB至4MB），提供最佳下载性能。"
+    },
+    "storage": {
+      "title": "OPFS/IndexedDB存储",
+      "description": "优先使用Chrome的OPFS流式传输，其他浏览器自动回退到IndexedDB，提供广泛的兼容性。"
+    },
+    "integrity": {
+      "title": "完整性验证",
+      "description": "可选的SHA-256哈希验证确保下载文件的完整性。"
+    },
+    "mobileFriendly": {
+      "title": "移动友好",
+      "description": "为移动环境设计，支持蜂窝网络控制、尊重数据节省模式、最低网络速度设置等功能。"
+    },
+    "reactSupport": {
+      "title": "React支持",
+      "description": "提供易用的React Hook，可在React应用中立即使用。"
+    }
+  },
+  "quickStart": {
+    "title": "快速开始",
+    "installation": "安装",
+    "basicUsage": "基本用法",
+    "reactHook": "React Hook"
+  },
+  "keyFeatures": {
+    "title": "主要特性",
+    "autoPauseResume": {
+      "title": "自动暂停/恢复",
+      "description": "当用户主动使用网络时自动暂停下载，网络空闲时自动恢复。这样可以在不干扰用户体验的情况下高效预取大文件。"
+    },
+    "rangeResume": {
+      "title": "基于Range的断点续传",
+      "description": "使用HTTP Range请求继续中断的下载。网络错误或用户暂停后无需从头开始下载，可以从中断点继续。"
+    },
+    "serverRequirements": {
+      "title": "服务器要求",
+      "item1": "支持HTTP Range（206 Partial Content）",
+      "item2": "推荐使用ETag/If-Range（用于安全续传）"
+    }
+  },
+  "browserSupport": {
+    "title": "浏览器支持",
+    "description": "Chrome 114+使用OPFS流式传输提供最佳性能。其他现代浏览器通过IndexedDB回退支持。"
+  },
+  "cta": {
+    "title": "立即开始",
+    "description": "使用Whisper Fetch提升用户体验",
+    "viewDocs": "查看文档",
+    "viewExamples": "查看示例"
+  },
+  "footer": {
+    "license": "MIT License © 2024 jobkaehenry"
+  },
+  "examples": {
+    "title": "使用示例",
+    "subtitle": "了解在实际项目中使用Whisper Fetch的各种方法",
+    "videoStreaming": {
+      "title": "视频流媒体平台",
+      "description": "在用户观看前预下载大视频文件，提供无缓冲的观看体验。"
+    },
+    "gameAssets": {
+      "title": "游戏资源加载器",
+      "description": "在后台预加载下一关卡的资源，最大限度减少关卡切换时的加载时间。"
+    },
+    "documentViewer": {
+      "title": "文档查看器",
+      "description": "高效预加载大型PDF或文档文件，准备立即显示。"
+    },
+    "nextjs": {
+      "title": "Next.js集成",
+      "description": "在Next.js App Router中使用Whisper Fetch的方法。标记为客户端组件以防止SSR问题。"
+    },
+    "offline": {
+      "title": "离线内容管理",
+      "description": "预下载并缓存内容，供用户稍后离线查看。"
+    },
+    "progressive": {
+      "title": "渐进式图片加载",
+      "description": "首先显示低质量缩略图，在后台加载高质量图片，提供平滑的过渡效果。"
+    },
+    "moreUseCases": {
+      "title": "更多用例",
+      "musicStreaming": {
+        "title": "音乐流媒体",
+        "description": "预下载播放列表中的下一首歌曲，提供无缝播放体验。"
+      },
+      "ebook": {
+        "title": "电子书阅读器",
+        "description": "根据用户当前阅读位置预加载下一章节。"
+      },
+      "designTool": {
+        "title": "设计工具",
+        "description": "在后台加载高分辨率资源和字体文件，立即可用。"
+      },
+      "dataViz": {
+        "title": "数据可视化",
+        "description": "预下载大数据集，实现快速图表渲染。"
+      },
+      "videoEditor": {
+        "title": "视频编辑器",
+        "description": "预加载时间轴中的下一个片段，提供流畅的编辑体验。"
+      },
+      "maps": {
+        "title": "地图应用",
+        "description": "预下载周围的地图瓦片和图层，实现快速地图导航。"
+      }
+    },
+    "ctaTitle": "应用到您的项目",
+    "ctaDescription": "Whisper Fetch可以灵活配置以适应各种使用场景"
+  },
+  "language": "语言"
+}
