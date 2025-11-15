@@ -8,12 +8,14 @@ export interface ManagedPrefetchOptions extends PrefetchOptions {
 
 export interface PrefetchManager {
   add(opts: ManagedPrefetchOptions): string;  // 요청 추가 후 ID 반환
+  addBatch(urls: (string | ManagedPrefetchOptions)[]): string[];  // 여러 요청 동시 추가
   remove(id: string): boolean;               // 요청 제거
   pause(id?: string): void;                  // 특정 또는 전체 일시정지
   resume(id?: string): void;                 // 특정 또는 전체 재개
   stop(id?: string): void;                   // 특정 또는 전체 중단
   getStatus(id: string): { status: string; progress: { done: number; total?: number } } | null;
   purge(id: string): Promise<void>;          // 특정 요청 정리
+  setMaxConcurrent(n: number): void;         // 동시 다운로드 수 설정
 }
 
 class PriorityQueue {
@@ -41,19 +43,47 @@ class PriorityQueue {
   isEmpty(): boolean {
     return this.items.length === 0;
   }
+
+  has(id: string): boolean {
+    return this.items.some(item => item.id === id);
+  }
 }
 
 export class PrefetchManagerImpl implements PrefetchManager {
   private queue = new PriorityQueue();
   private active: Map<string, BackgroundPrefetcher> = new Map();
-  private maxConcurrent = 2;  // 동시 처리 제한
+  private maxConcurrent: number;  // 동시 처리 제한
   private paused = false;
+
+  constructor(maxConcurrent = 2) {
+    this.maxConcurrent = maxConcurrent;
+  }
 
   add(opts: ManagedPrefetchOptions): string {
     const id = opts.id ?? `prefetch-${Date.now()}-${Math.random()}`;
     this.queue.enqueue(opts, id);
     this.processQueue();
     return id;
+  }
+
+  addBatch(urls: (string | ManagedPrefetchOptions)[]): string[] {
+    const ids: string[] = [];
+    urls.forEach((urlOrOpts) => {
+      const opts: ManagedPrefetchOptions = typeof urlOrOpts === 'string'
+        ? { url: urlOrOpts }
+        : urlOrOpts;
+      const id = opts.id ?? `prefetch-${Date.now()}-${Math.random()}-${ids.length}`;
+      this.queue.enqueue(opts, id);
+      ids.push(id);
+    });
+    this.processQueue();
+    return ids;
+  }
+
+  setMaxConcurrent(n: number): void {
+    if (n < 1) throw new Error('maxConcurrent must be at least 1');
+    this.maxConcurrent = n;
+    this.processQueue();
   }
 
   remove(id: string): boolean {
@@ -98,7 +128,7 @@ export class PrefetchManagerImpl implements PrefetchManager {
         progress: { done: p.getOffset(), total: p.getTotal() }
       };
     }
-    return this.queue.items.some(item => item.id === id) ? { status: 'queued', progress: { done: 0 } } : null;
+    return this.queue.has(id) ? { status: 'queued', progress: { done: 0 } } : null;
   }
 
   async purge(id: string): Promise<void> {
