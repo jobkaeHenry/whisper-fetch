@@ -74,6 +74,86 @@ const { status, progress, start, pause, resume, stop, objectURL } = usePrefetche
 });
 ```
 
+## Parallel URL Fetching (PrefetchManager)
+
+병렬로 여러 URL을 동시에 다운로드하여 병목 현상을 제거합니다.
+
+### Basic Usage
+```ts
+import { PrefetchManagerImpl } from '@jobkaehenry/whisper-fetch';
+
+// 동시에 5개까지 다운로드
+const manager = new PrefetchManagerImpl(5);
+
+// 단일 URL 추가
+const id = manager.add({
+  url: 'https://cdn.example.com/video1.mp4',
+  priority: 10,  // 높을수록 우선순위가 높음
+  onProgress: (done, total) => console.log(`${done}/${total}`)
+});
+
+// 여러 URL 일괄 추가
+const ids = manager.addBatch([
+  'https://cdn.example.com/video1.mp4',
+  'https://cdn.example.com/video2.mp4',
+  { url: 'https://cdn.example.com/video3.mp4', priority: 5 }
+]);
+
+// 상태 확인
+const status = manager.getStatus(id);
+// { status: 'active' | 'queued', progress: { done: number, total?: number } }
+
+// 동시 다운로드 수 동적 변경
+manager.setMaxConcurrent(10);
+
+// 일시정지/재개/중단
+manager.pause(id);      // 특정 ID만
+manager.pause();        // 전체 일시정지
+manager.resume(id);     // 특정 ID만
+manager.resume();       // 전체 재개
+manager.stop(id);       // 특정 ID만
+manager.stop();         // 전체 중단
+
+// 제거
+manager.remove(id);
+await manager.purge(id);
+```
+
+### PrefetchManager API
+- **`new PrefetchManagerImpl(maxConcurrent?: number)`** Create manager with concurrent limit (default: 2)
+- **`add(opts: ManagedPrefetchOptions): string`** Add single URL, returns ID
+- **`addBatch(urls: (string | ManagedPrefetchOptions)[]): string[]`** Add multiple URLs at once
+- **`setMaxConcurrent(n: number): void`** Adjust concurrent download limit
+- **`pause(id?: string): void`** Pause specific or all downloads
+- **`resume(id?: string): void`** Resume specific or all downloads
+- **`stop(id?: string): void`** Stop specific or all downloads
+- **`remove(id: string): boolean`** Remove from queue
+- **`getStatus(id: string)`** Get download status and progress
+- **`purge(id: string): Promise<void>`** Clean up downloaded data
+
+### ManagedPrefetchOptions
+`BackgroundPrefetcher`의 모든 옵션에 추가로:
+- **`priority?: number`** 우선순위 (기본값: 0, 높을수록 먼저 처리)
+- **`id?: string`** 고유 ID (미지정시 자동 생성)
+
+### Use Cases
+```ts
+// 대용량 비디오 여러 개 미리 다운로드
+const manager = new PrefetchManagerImpl(3);
+const videoIds = manager.addBatch([
+  { url: '/videos/ep1.mp4', priority: 10 },  // 현재 에피소드는 우선순위 높게
+  { url: '/videos/ep2.mp4', priority: 5 },
+  { url: '/videos/ep3.mp4', priority: 1 }
+]);
+
+// 네트워크 상태에 따라 동시 다운로드 수 조정
+if (navigator.connection?.effectiveType === '4g') {
+  manager.setMaxConcurrent(10);
+} else {
+  manager.setMaxConcurrent(2);
+}
+```
+
 ## Advanced
 - **Storage**: OPFS first (Chrome), fallback to IDB chunk-append + assemble.
 - **Integrity**: If `integritySha256` provided, SHA-256 verified on assembled Blob.
