@@ -16,6 +16,18 @@ const config: GatsbyConfig = {
         path: "./docs/pages/",
       },
     },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "Whisper Fetch - 지능형 백그라운드 파일 프리페치",
+        short_name: "Whisper Fetch",
+        start_url: "/",
+        background_color: "#ffffff",
+        theme_color: "#6366f1",
+        display: "minimal-ui",
+        icon: "src/icon.png", // This will be optional
+      },
+    },
   ],
 };
 

@@ -68,9 +68,12 @@
   },
   "dependencies": {
     "@types/node": "^24.10.1",
+    "framer-motion": "^12.23.24",
     "gatsby": "^5.15.0",
+    "gatsby-plugin-manifest": "^5.15.0",
     "gatsby-plugin-typescript": "^5.15.0",
     "gatsby-source-filesystem": "^5.15.0",
+    "prism-react-renderer": "^2.4.1",
     "react-dom": "^19.2.0"
   }
 }
