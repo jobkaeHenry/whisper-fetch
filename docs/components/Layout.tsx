@@ -34,7 +34,7 @@ const LayoutContent: React.FC<LayoutProps> = ({ children }) => {
             <h1>
               <Link to="/">Whisper Fetch</Link>
             </h1>
-            <span className="version">v1.0.0</span>
+            <span className="version">v1.0.1</span>
           </div>
           <ul className="nav-links">
             <li>
