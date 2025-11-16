@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /.cache
+Disallow: /public
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Sitemap: https://jobkaehenry.github.io/whisper-fetch/sitemap-index.xml
+Host: https://jobkaehenry.github.io
