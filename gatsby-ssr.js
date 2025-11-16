@@ -1,9 +1,7 @@
-import React from 'react';
-
-export const wrapPageElement = ({ element }) => {
+exports.wrapPageElement = ({ element }) => {
   return element;
 };
 
-export const wrapRootElement = ({ element }) => {
+exports.wrapRootElement = ({ element }) => {
   return element;
 };

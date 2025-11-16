@@ -13,15 +13,19 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+    }
   }, []);
 
   useEffect(() => {
-    if (mounted) {
+    if (mounted && typeof document !== 'undefined') {
       document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('theme', theme);
+      }
     }
   }, [theme, mounted]);
 
@@ -29,10 +33,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
+  // Always render Provider, even during SSR
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}

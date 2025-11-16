@@ -2,7 +2,6 @@
   "name": "@jobkaehenry/whisper-fetch",
   "version": "1.0.0",
   "description": "Idle-aware, resumable background prefetch (Range + Abort) with OPFS/IDB storage. Next.js ready.",
-  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -51,9 +50,10 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "docs:develop": "gatsby develop",
-    "docs:build": "gatsby build",
-    "docs:serve": "gatsby serve",
-    "docs:clean": "gatsby clean"
+    "docs:build": "gatsby build --prefix-paths",
+    "docs:serve": "gatsby serve --prefix-paths",
+    "docs:clean": "gatsby clean",
+    "docs:deploy": "pnpm docs:build && npx gh-pages -d public"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",
@@ -69,6 +69,7 @@
     "gatsby-plugin-sitemap": "^6.15.0",
     "gatsby-plugin-typescript": "^5.15.0",
     "gatsby-source-filesystem": "^5.15.0",
+    "gh-pages": "^6.3.0",
     "i18next": "^25.6.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
@@ -80,5 +81,9 @@
     "ts-jest": "^29.1.1",
     "tsup": "^8.0.1",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "motion-dom": "^12.23.23",
+    "motion-utils": "^12.23.6"
   }
 }

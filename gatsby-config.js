@@ -1,9 +1,13 @@
-import type { GatsbyConfig } from "gatsby";
+const path = require('path');
 
-const config: GatsbyConfig = {
+/**
+ * @type {import('gatsby').GatsbyConfig}
+ */
+const config = {
+  pathPrefix: '/whisper-fetch',
   siteMetadata: {
     title: `Whisper Fetch - Intelligent Background File Prefetching Library`,
-    siteUrl: `https://github.com/jobkaeHenry/whisper-fetch`,
+    siteUrl: `https://jobkaehenry.github.io/whisper-fetch`,
     description: `Idle-aware, resumable background prefetch library for large files with OPFS/IndexedDB storage. React support, SHA-256 integrity verification, and adaptive chunk sizing.`,
     author: `@jobkaehenry`,
     keywords: [
@@ -28,6 +32,12 @@ const config: GatsbyConfig = {
     "gatsby-plugin-typescript",
     "gatsby-plugin-react-helmet",
     {
+      resolve: "gatsby-plugin-page-creator",
+      options: {
+        path: `${__dirname}/docs/pages`,
+      },
+    },
+    {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
@@ -47,6 +57,8 @@ const config: GatsbyConfig = {
         localeJsonSourceName: `locale`,
         languages: [`en`, `ko`, `ja`, `zh`, `fr`, `es`, `ar`, `hi`],
         defaultLanguage: `en`,
+        redirect: false,
+        generateDefaultLanguagePage: true,
         siteUrl: `https://github.com/jobkaeHenry/whisper-fetch`,
         i18nextOptions: {
           interpolation: {
@@ -54,27 +66,22 @@ const config: GatsbyConfig = {
           },
           keySeparator: '.',
           nsSeparator: false
-        },
-        pages: [
-          {
-            matchPath: '/:lang?',
-            getLanguageFromPath: true
-          }
-        ]
+        }
       }
     },
-    {
-      resolve: "gatsby-plugin-manifest",
-      options: {
-        name: "Whisper Fetch - Intelligent Background File Prefetching",
-        short_name: "Whisper Fetch",
-        start_url: "/",
-        background_color: "#ffffff",
-        theme_color: "#6366f1",
-        display: "minimal-ui",
-        icon: "src/icon.png", // This will be optional
-      },
-    },
+    // Temporarily disabled until icon file is created
+    // {
+    //   resolve: "gatsby-plugin-manifest",
+    //   options: {
+    //     name: "Whisper Fetch - Intelligent Background File Prefetching",
+    //     short_name: "Whisper Fetch",
+    //     start_url: "/",
+    //     background_color: "#ffffff",
+    //     theme_color: "#6366f1",
+    //     display: "minimal-ui",
+    //     icon: "src/icon.png", // TODO: Add icon file
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
@@ -92,23 +99,21 @@ const config: GatsbyConfig = {
             }
           }
         `,
-        resolveSiteUrl: () => 'https://github.com/jobkaeHenry/whisper-fetch',
+        resolveSiteUrl: () => 'https://jobkaehenry.github.io/whisper-fetch',
         resolvePages: ({
           allSitePage: { nodes: allPages },
-        }: any) => {
-          return allPages.map((page: any) => {
+        }) => {
+          return allPages.map((page) => {
             return { ...page };
           });
         },
-        serialize: ({ path }: any) => {
-          // 언어별 우선순위 설정
+        serialize: ({ path }) => {
           const priority = path === '/' || path === '/en' ? 1.0
             : path.includes('/docs') ? 0.9
             : path.includes('/api') ? 0.8
             : path.includes('/examples') ? 0.7
             : 0.5;
 
-          // 변경 빈도
           const changefreq = path === '/' || path === '/en' ? 'daily'
             : path.includes('/docs') || path.includes('/api') ? 'weekly'
             : 'monthly';
@@ -124,8 +129,8 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://github.com/jobkaeHenry/whisper-fetch',
-        sitemap: 'https://github.com/jobkaeHenry/whisper-fetch/sitemap-index.xml',
+        host: 'https://jobkaehenry.github.io/whisper-fetch',
+        sitemap: 'https://jobkaehenry.github.io/whisper-fetch/sitemap-index.xml',
         policy: [
           {
             userAgent: '*',
@@ -148,4 +153,4 @@ const config: GatsbyConfig = {
   ],
 };
 
-export default config;
+module.exports = config;

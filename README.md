@@ -2,6 +2,8 @@
 
 더 나은 UX를 위해 대용량 파일을 네트워크 아이들 상태에서 백그라운드에서 청크로 프리패치하는 라이브러리. Idle-aware, resumable background prefetch (Range + Abort) with OPFS/IDB storage. Next.js ready.
 
+📚 **[Documentation](https://jobkaehenry.github.io/whisper-fetch)** | 📦 **[npm](https://www.npmjs.com/package/@jobkaehenry/whisper-fetch)**
+
 ## Features
 - Pause on foreground network activity; resume on idle
 - Adaptive chunk (512KB–4MB) + Range resume

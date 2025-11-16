@@ -24,7 +24,7 @@ const SEO: React.FC<SEOProps> = ({
   const { language } = useI18next();
   const currentLang = lang || language || 'en';
 
-  const siteUrl = 'https://github.com/jobkaeHenry/whisper-fetch';
+  const siteUrl = 'https://jobkaehenry.github.io/whisper-fetch';
   const defaultTitle = 'Whisper Fetch - Intelligent Background File Prefetching Library';
   const defaultDescription = 'Idle-aware, resumable background prefetch library for large files with OPFS/IndexedDB storage. React support, SHA-256 integrity verification, and adaptive chunk sizing.';
   const defaultImage = `${siteUrl}/og-image.png`;

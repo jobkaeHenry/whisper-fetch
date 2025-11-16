@@ -31,21 +31,31 @@ const LayoutContent: React.FC<LayoutProps> = ({ children }) => {
       <header className="header">
         <nav className="nav">
           <div className="nav-brand">
-            <h1>Whisper Fetch</h1>
+            <h1>
+              <Link to="/">Whisper Fetch</Link>
+            </h1>
             <span className="version">v1.0.0</span>
           </div>
           <ul className="nav-links">
-            <li><Link to="/">{t('nav.home')}</Link></li>
-            <li><Link to="/docs">{t('nav.docs')}</Link></li>
-            <li><Link to="/api">{t('nav.api')}</Link></li>
-            <li><Link to="/examples">{t('nav.examples')}</Link></li>
+            <li>
+              <Link to="/">{t("nav.home")}</Link>
+            </li>
+            <li>
+              <Link to="/docs">{t("nav.docs")}</Link>
+            </li>
+            <li>
+              <Link to="/api">{t("nav.api")}</Link>
+            </li>
+            <li>
+              <Link to="/examples">{t("nav.examples")}</Link>
+            </li>
             <li>
               <a
                 href="https://github.com/jobkaeHenry/whisper-fetch"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {t('nav.github')}
+                {t("nav.github")}
               </a>
             </li>
             <li>
@@ -61,18 +71,26 @@ const LayoutContent: React.FC<LayoutProps> = ({ children }) => {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <Link to="/">{t('nav.home')}</Link>
-            <Link to="/docs">{t('nav.docs')}</Link>
-            <Link to="/api">{t('nav.api')}</Link>
-            <Link to="/examples">{t('nav.examples')}</Link>
-            <a href="https://github.com/jobkaeHenry/whisper-fetch" target="_blank" rel="noopener noreferrer">
-              {t('nav.github')}
+            <Link to="/">{t("nav.home")}</Link>
+            <Link to="/docs">{t("nav.docs")}</Link>
+            <Link to="/api">{t("nav.api")}</Link>
+            <Link to="/examples">{t("nav.examples")}</Link>
+            <a
+              href="https://github.com/jobkaeHenry/whisper-fetch"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("nav.github")}
             </a>
-            <a href="https://www.npmjs.com/package/@jobkaehenry/whisper-fetch" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.npmjs.com/package/@jobkaehenry/whisper-fetch"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               NPM
             </a>
           </div>
-          <p>{t('footer.license')}</p>
+          <p>{t("footer.license")}</p>
         </div>
       </footer>
     </div>
